@@ -1,0 +1,42 @@
+https://gitlab.com/apparmor/apparmor/-/wikis/QuickProfileLanguage
+
+Profiles:
+
+    - AppArmor profiles are simple text files located in /etc/apparmor.d/
+    - Named after full path of the executable 
+      - Example: /etc/apparmor.d/bin.ping    this is the AppArmor profile for /bin/ping
+
+    - Two types of rules used in profiles
+      - Path entries: Detailing which files an application can access in the file system
+      - Capability entries: Determine what privileges a confined process is allowed to use
+    - New or modified policies can be applied to the running system without a reboot
+    - Supports per-profile learning (complain mode) to help users write and maintain policy.
+    - Learning mode allows for a profile to be created by running a program normally and learning its behavior
+      - After AA has sufficiently learned the behavior, the profile may be turned to enforcing mode.
+
+
+ /usr/bin/firefox {
+    # profile contents
+ }
+
+ /usr/bin/firefox flags=(complain) {
+    # profile contents
+ }
+
+ profile /usr/bin/ {
+    # profile contents
+ }
+
+ profile user1 {
+    # profile contents
+ }
+
+
+    - complain flag is when actions would be denied by the profile are instead allowed and logged
+    - Comments begin with #
+    - Text following # is ignored (with the exception of the #include rule)
+
+Include Rules
+
+    - Policy files can include other files to share text segments.
+
